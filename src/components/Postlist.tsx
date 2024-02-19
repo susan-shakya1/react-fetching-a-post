@@ -1,25 +1,16 @@
 import { useEffect, useState } from "react";
 import { Postcard } from "./postcard";
+import { Fetchapi } from "../data/fetech";
+import { Tpost } from "../data/type";
+
 export function Postlist() {
-  const [posts, setposts] = useState<
-    {
-      id: number;
-      userid: number;
-      title: string;
-      body: string;
-    }[]
-  >([]);
+  const [posts, setposts] = useState<Tpost[]>([]);
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/posts", { method: "GET" })
-      .then((data) => {
-        return data.json();
-      })
-      .then((jsonData) => {
-        setposts(jsonData);
-      })
-      .catch((error) => {
-        console.log("error if json format is not formated", error);
-      });
+    async function getposts() {
+      const posts = await Fetchapi();
+      setposts(posts);
+    }
+    getposts();
   }, []);
   return (
     <div>

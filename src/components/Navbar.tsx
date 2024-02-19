@@ -4,7 +4,9 @@ export function Navbar() {
       style={{
         display: "flex",
         justifyContent: "space-between",
-        marginBottom: "20px",
+        marginBottom: "60px",
+        maxWidth: "1100px",
+        margin: "0 auto",
       }}
     >
       <img
@@ -19,6 +21,8 @@ export function Navbar() {
       <input
         style={{
           padding: "5px",
+          width: "420px",
+          outline: "none",
         }}
         placeholder="search posts"
         type="text"
