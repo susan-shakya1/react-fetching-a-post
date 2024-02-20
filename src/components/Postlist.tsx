@@ -1,22 +1,34 @@
 import { useEffect, useState } from "react";
-import { Postcard } from "./postcard";
+import { PostCard } from "./postcard";
 import { Fetchapi } from "../data/fetech";
 import { Tpost } from "../data/type";
 
 export function Postlist() {
-  const [posts, setposts] = useState<Tpost[]>([]);
+  const [posts, setPosts] = useState<Tpost[]>([]);
   useEffect(() => {
     async function getposts() {
       const posts = await Fetchapi();
-      setposts(posts);
+      setPosts(posts);
     }
     getposts();
   }, []);
   return (
-    <div>
+    <div
+      style={{
+        maxWidth: "700px",
+        margin: "0 auto",
+      }}
+    >
       {posts.map((post) => {
         return (
-          <Postcard key={post.id} title={post.title} description={post.body} />
+          <PostCard
+            key={post.id}
+            postId={post.id}
+            title={post.title}
+            description={post.body}
+            posts={posts}
+            setPosts={setPosts}
+          />
         );
       })}
     </div>
