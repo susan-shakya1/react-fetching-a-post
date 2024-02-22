@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { Deletepost } from "../data/delete-post";
 import { Tpost } from "../data/type";
-
+import { Postlist } from "./Postlist";
+import { Link } from "react-router-dom";
 export function PostCard(props: {
   title: string;
   description: string;
@@ -44,14 +45,21 @@ export function PostCard(props: {
         padding: "10px",
         margin: "10px 0",
       }}
+      onClick={() => {
+        {
+          <Postlist />;
+        }
+      }}
     >
-      <h2
-        style={{
-          color: "#aaa",
-        }}
-      >
-        {props.title}
-      </h2>
+      <Link to={`/posts/${props.postId}`} style={{ textDecoration: "none" }}>
+        <h2
+          style={{
+            color: "#aaa",
+          }}
+        >
+          {props.title}
+        </h2>
+      </Link>
       <p
         style={{
           color: "#000",

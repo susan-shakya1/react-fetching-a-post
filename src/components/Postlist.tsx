@@ -21,14 +21,16 @@ export function Postlist() {
     >
       {posts.map((post) => {
         return (
-          <PostCard
-            key={post.id}
-            postId={post.id}
-            title={post.title}
-            description={post.body}
-            posts={posts}
-            setPosts={setPosts}
-          />
+          <div>
+            <PostCard
+              key={post.id}
+              postId={post.id}
+              title={post.title}
+              description={post.body}
+              posts={posts}
+              setPosts={setPosts}
+            />
+          </div>
         );
       })}
     </div>

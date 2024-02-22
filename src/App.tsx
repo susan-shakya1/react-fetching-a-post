@@ -1,12 +1,7 @@
 import "./App.css";
 import { Navbar } from "./components/Navbar";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Outlet,
-  Link,
-} from "react-router-dom";
-import { posts } from "./data/posts";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+
 import { PostDetail } from "./components/postdetail";
 import { Postlist } from "./components/Postlist";
 
@@ -22,39 +17,17 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: (
-          <div>
-            <Postlist />
-          </div>
-        ),
+        element: <Postlist />,
       },
       {
         path: "/posts",
-        element: (
-          <div>
-            <h2>show list of posts</h2>
-            <ul>
-              {posts.map((post) => {
-                return (
-                  <li key={post.id}>
-                    <Link to={`/posts/${post.id}`}>{post.title}</Link>
-                  </li>
-                );
-              })}
-            </ul>
-
-            <div className="post-detail-container">
-              <Outlet />
-            </div>
-          </div>
-        ),
+        element: <Postlist />,
+      },
+      {
+        path: "/posts/:postId",
+        element: <PostDetail />,
       },
     ],
-  },
-
-  {
-    path: "/posts/:postId",
-    element: <PostDetail />,
   },
 ]);
 
