@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
 import { PostDetail } from "./components/postdetail";
 import { Postlist } from "./components/Postlist";
+import { TodoList } from "./components/Todolist";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
         element: <PostDetail />,
       },
     ],
+  },
+  {
+    path: "/todos",
+    element: <TodoList />,
   },
 ]);
 

@@ -12,3 +12,21 @@ body {
   /* border: 1px solid black; */
   padding: 10px;
 }
+table tbody td{
+  border: 1px solid black;
+  border-collapse: collapse;
+  color: #2e2e22;
+  padding: 5px 10px;
+  font-size: 20px;
+}
+table thead th{
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px 10px;
+  font-size: 24px;
+}
+.flex{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
