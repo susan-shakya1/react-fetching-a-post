@@ -11,6 +11,8 @@ export function TodoList() {
       completed: boolean;
     }[]
   >([]);
+  const [IsModelOpen, setIsModelOpen] = useState(false);
+  const [selectId, setSelectId] = useState(null);
 
   useEffect(() => {
     const handleApi = async () => {
@@ -27,6 +29,13 @@ export function TodoList() {
     };
     handleApi();
   }, []);
+  // write a code for deleting a content from a UI
+  const handleDelete = (id: number) => {
+    const filterId = todos.filter((todo) => todo.id !== id);
+    setTodos(filterId);
+  };
+
+  const Selecttodos = todos.find((todo) => todo.id === selectId);
 
   return (
     <div>
@@ -35,6 +44,7 @@ export function TodoList() {
         style={{
           width: "80%",
           margin: "0 auto",
+          zIndex: "-20",
         }}
       >
         <thead>
@@ -52,17 +62,95 @@ export function TodoList() {
                   <FaTrashCanArrowUp
                     style={{
                       margin: "0 10px",
-                      color: "red",
+                      color: "#ff7f7f",
+                      cursor: "pointer",
                     }}
-                    onClick={() => {}}
+                    onClick={() => {
+                      handleDelete(todo.id);
+                    }}
+                    className="deletebtn"
                   />
-                  <FaEdit />
+                  <FaEdit
+                    onClick={() => {
+                      setIsModelOpen(true);
+
+                      setSelectId(todo.id);
+                    }}
+                    className="editbtn"
+                  />
                 </div>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      {IsModelOpen ? (
+        <div className="modelopen">
+          <div className="stylesmodel">
+            <div className="tablestyle">
+              {" "}
+              <h2
+                style={{
+                  padding: "10px",
+                  textAlign: "center",
+                }}
+              >
+                Todo Model
+              </h2>
+              <label
+                htmlFor=""
+                style={{
+                  margin: "10px 0 0 0",
+                }}
+              >
+                Id:
+              </label>
+              <input
+                type="text"
+                style={{
+                  padding: "5px",
+                }}
+                value={Selecttodos?.id}
+              />
+              <label htmlFor="">Title:</label>
+              <textarea
+                name="title"
+                id=""
+                cols="10"
+                rows="5"
+                value={Selecttodos?.title}
+                onChange={(e) => {
+                  console.log("this is the onchange value", e.target.value);
+                }}
+              ></textarea>
+              <button
+                onClick={() => {
+                  setIsModelOpen(false);
+                }}
+                className="btn"
+              >
+                Close
+              </button>
+              <div
+                style={{
+                  marginTop: "5px",
+                  display: "flex",
+                  gap: "10px",
+                }}
+              >
+                <label htmlFor="">Completed</label>
+                <input
+                  type="checkbox"
+                  defaultChecked={Selecttodos?.completed}
+                />
+              </div>
+              <div className="updatebtn">
+                <button>Update</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
