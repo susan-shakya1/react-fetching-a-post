@@ -36,6 +36,14 @@ export function TodoList() {
   };
 
   const Selecttodos = todos.find((todo) => todo.id === selectId);
+  const handleupdatebtn = (updatadata) => {
+    const findid = todos.findIndex((todo) => todo.id === selectId);
+    todos.splice(findid, 1, {
+      title: updatadata,
+    });
+    setTodos(todos);
+    setIsModelOpen(false);
+  };
 
   return (
     <div>
@@ -87,7 +95,15 @@ export function TodoList() {
       {IsModelOpen ? (
         <div className="modelopen">
           <div className="stylesmodel">
-            <div className="tablestyle">
+            <form
+              className="tablestyle"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const updateTitle = e.target.title.value;
+                console.log(updateTitle, "this is the update title");
+                handleupdatebtn(updateTitle);
+              }}
+            >
               {" "}
               <h2
                 style={{
@@ -110,7 +126,7 @@ export function TodoList() {
                 style={{
                   padding: "5px",
                 }}
-                value={Selecttodos?.id}
+                defaultValue={Selecttodos?.id}
               />
               <label htmlFor="">Title:</label>
               <textarea
@@ -118,7 +134,7 @@ export function TodoList() {
                 id=""
                 cols="10"
                 rows="5"
-                value={Selecttodos?.title}
+                defaultValue={Selecttodos?.title}
                 onChange={(e) => {
                   console.log("this is the onchange value", e.target.value);
                 }}
@@ -145,9 +161,16 @@ export function TodoList() {
                 />
               </div>
               <div className="updatebtn">
-                <button>Update</button>
+                <button
+                  type="submit"
+                  onSubmit={() => {
+                    console.log("this is the selected update btn", Selecttodos);
+                  }}
+                >
+                  Update
+                </button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       ) : null}
