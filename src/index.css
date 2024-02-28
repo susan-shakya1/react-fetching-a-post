@@ -12,89 +12,9 @@ body {
   /* border: 1px solid black; */
   padding: 10px;
 }
-table tbody td{
-  border: 1px solid black;
-  border-collapse: collapse;
-  color: #2e2e22;
-  padding: 5px 10px;
-  font-size: 20px;
-}
-table thead th{
-  border: 1px solid black;
-  border-collapse: collapse;
-  padding: 5px 10px;
-  font-size: 24px;
-}
-.flex{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.deletebtn{
-  transform: skew(0.7);
-}
-.deletebtn:hover{
-  transform: skew(1.1);
-  color: blue;
-}
-.editbtn{
-  cursor: pointer;
-}
-.modelopen{
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #dbdbd4b6;
-  height: 100vh;
-  width: 100%;
-}
-.stylesmodel{
-  color: aliceblue;
 
- width: 40%;
- margin: 0 auto;
 
- background-color: rgba(63, 63, 200, 0.887);
- height: 300px;
- position: relative;
- 
-
-}
-.stylesmodel .btn{
-  position: absolute;
-right: 15px;
-top: 7px;
-font-size: 12px;
-  color: rgb(209, 67, 20);
-  padding: 5px 8px;
-  border: none;
-  border-radius: 0.2rem;
-  margin: 10px;
-  cursor: pointer;
-}
-.stylesmodel button:hover{
-  color:white ;
-  background-color:  rgb(209, 67, 20);
-  transition: 0.6s ease-in-out;
-}
-.tablestyle
-{
-  max-width: 300px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-
-}
-.updatebtn button{
-  padding: 5px 8px;
-  font-size: 12px;
-  cursor: pointer;
-  outline: none;
-  border-radius: 0.2rem;
-  margin-top: 5px;
+.pageBtn{
+  padding: 5px;
+  margin-right: 6px;
 }

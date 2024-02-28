@@ -30,7 +30,18 @@ function PostData(props: { postId: number }) {
     }
     GetPost();
   });
-
+  const handlevalue = (value: string) => {
+    setPost((preValue) => {
+      if (preValue) {
+        return {
+          ...preValue,
+          body: value,
+        };
+      } else {
+        return preValue;
+      }
+    });
+  };
   return (
     <div
       style={{
@@ -45,16 +56,18 @@ function PostData(props: { postId: number }) {
       <h1 style={{ textAlign: "center", color: "#9a9a9a", padding: "10px" }}>
         {post?.title}
       </h1>
-      <p
+      <textarea
         style={{
-          lineHeight: "22px",
-          wordSpacing: "5px",
-          color: "#444",
-          padding: "0 0 20px 0",
+          width: "100%",
+          height: "100px",
         }}
-      >
-        {post?.body}
-      </p>
+        value={post?.body}
+        onChange={(e) => {
+          const body = e.target.value;
+          handlevalue(body);
+        }}
+      />
+
       <p
         style={{
           color: "#555",
@@ -78,13 +91,7 @@ function PostData(props: { postId: number }) {
         >
           comments
         </label>
-        <textarea
-          name="comments"
-          id=""
-          rows="10"
-          cols="70"
-          placeholder="Comments...."
-        >
+        <textarea name="comments" id="" placeholder="Comments....">
           Comments....
         </textarea>
       </div>

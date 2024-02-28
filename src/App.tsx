@@ -1,10 +1,9 @@
 import "./App.css";
 import { Navbar } from "./components/Navbar";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-
 import { PostDetail } from "./components/postdetail";
 import { Postlist } from "./components/Postlist";
-import { TodoList } from "./components/Todolist";
+// import { TodoList } from "./components/Todolist";
 
 const router = createBrowserRouter([
   {
@@ -30,10 +29,10 @@ const router = createBrowserRouter([
       },
     ],
   },
-  {
-    path: "/todos",
-    element: <TodoList />,
-  },
+  // {
+  //   path: "/todos",
+  //   element: <TodoList />,
+  // },
 ]);
 
 function App() {
