@@ -3,22 +3,21 @@ import { PostCard } from "./postcard";
 import { Fetchapi } from "../data/fetech";
 import { Tpost } from "../data/type";
 
-const default_number_of_post = 5;
 export function Postlist() {
   const [posts, setPosts] = useState<Tpost[]>([]);
   const [numberOfPostFromBackend, setNumberOFPostFromBackend] = useState(0);
-  const [page] = useState(1);
-  // const [postNumber, setPostNumber] = useState(default_number_of_post);
+  const [page, setPage] = useState(1);
+  // const default_number_of_post = 5;
+  const [postNumber, setPostNumber] = useState(5);
   // const [currentPage] = useState(1);
   // const [postsPerPage] = useState(10);
-  const numberOfPage = Math.ceil(
-    numberOfPostFromBackend / default_number_of_post
-  );
-  console.log(numberOfPage);
+  const numberOfPage = Math.ceil(numberOfPostFromBackend / postNumber);
+  console.log("this is the number of page required", numberOfPage);
 
   const pages = Array.from({ length: numberOfPage }, (_, index) => {
     return index + 1;
   });
+  const options = [{ value: 5 }, { value: 10 }, { value: 20 }];
 
   useEffect(() => {
     async function getposts() {
@@ -27,8 +26,8 @@ export function Postlist() {
 
       // formula
       // default_number_of_post*(page-1):default_number_of_post*page
-      const startindex = default_number_of_post * (page - 1);
-      const endindex = default_number_of_post * page;
+      const startindex = postNumber * (page - 1);
+      const endindex = postNumber * page;
       const sliceposts = posts.slice(startindex, endindex);
       setPosts(sliceposts);
     }
@@ -43,13 +42,28 @@ export function Postlist() {
     const posts = await Fetchapi();
     setNumberOFPostFromBackend(posts.length);
 
-    const startindex = default_number_of_post * (page - 1);
-    const endindex = default_number_of_post * page;
+    const startindex = postNumber * (page - 1);
+    const endindex = postNumber * page;
     const sliceposts = posts.slice(startindex, endindex);
+    console.log("this show post slice", sliceposts);
     setPosts(sliceposts);
   };
 
-  const options = [{ value: 5 }, { value: 8 }, { value: 20 }];
+  const handlePostsChange = async (event) => {
+    const value = parseInt(event.target.value);
+    console.log("this is the value", value);
+    const page = 1;
+    setPostNumber(value);
+    const posts = await Fetchapi();
+    setNumberOFPostFromBackend(posts.length);
+
+    const startindex = value * (page - 1);
+    const endindex = value * page;
+    const sliceposts = posts.slice(startindex, endindex);
+    console.log("this show post slice", sliceposts);
+    setPosts(sliceposts);
+    setPage(1);
+  };
   return (
     <div
       style={{
@@ -71,21 +85,31 @@ export function Postlist() {
           </div>
         );
       })}
-      {pages.map((page) => (
+      {pages.map((pageElement) => (
         <button
           className="pageBtn"
+          // style={{
+          //   backgroundColor: pageElement === page ? "red" : "transparent",
+          // }}
           onClick={() => {
-            handlePageClicked(page);
+            handlePageClicked(pageElement);
           }}
         >
-          {page}
+          {pageElement}
         </button>
       ))}
       <div>
         <label htmlFor="per-page">Per Page</label>
-        <select name="per-page" id="per-page">
+        <select
+          name="per-page"
+          id="per-page"
+          value={postNumber}
+          onChange={handlePostsChange}
+        >
           {options.map((options) => (
-            <option value="">{options.value}</option>
+            <option value={options.value} key={options.value}>
+              {options.value}
+            </option>
           ))}
         </select>
       </div>
